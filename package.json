@@ -32,7 +32,7 @@
     "build:examples": "npm run clean:examples && webpack --config webpack/docs.config.es6.js",
     "build:visual-test": "webpack --config webpack/visual-test.es6.js",
     "examples": "npm run clean:examples && babel-node ./examples/server.js",
-    "lint": "eslint src test",
+
     "test": "npm run lint && karma start --single-run",
     "tdd": "karma start",
     "coverage": "COVERAGE=true karma start --single-run",
