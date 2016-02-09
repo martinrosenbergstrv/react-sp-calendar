@@ -90,6 +90,14 @@ let TimeGrid = React.createClass({
 
     allDayEvents.sort((a, b) => sortEvents(a, b, this.props))
 
+    var rooms = events.map(function(room) {
+      return room.room;
+    });
+
+    var roomsCount = rooms.filter(function(value, index, self) {
+      return self.indexOf(value) === index;
+    });
+
     let segments = allDayEvents.map(evt => eventSegments(evt, start, end, this.props))
     let { levels } = eventLevels(segments)
 
@@ -119,12 +127,31 @@ let TimeGrid = React.createClass({
         <div ref='content' className='rbc-time-content'>
           <TimeGutter ref='gutter' {...this.props}/>
           {
-            this.renderEvents(range, rangeEvents)
+            this.assignRoom(range, rangeEvents, roomsCount)
           }
         </div>
       </div>
     );
   },
+
+
+  assignRoom(range, rangeEvents, roomsCount) {
+    var self = this;
+    var eventsForRoom;
+
+    if(!this.props.dailyView) {
+      return this.renderEvents(range, rangeEvents)
+    }
+
+    return roomsCount.map(function(room) {
+      eventsForRoom = rangeEvents.filter(function(event) {
+        return room === event.room
+      });
+
+      return self.renderEvents(range, eventsForRoom)
+    });
+  },
+
 
   renderEvents(range, events){
     let { min, max, endAccessor, startAccessor, components } = this.props;
