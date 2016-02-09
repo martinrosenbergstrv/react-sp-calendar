@@ -118,6 +118,11 @@ let TimeGrid = React.createClass({
                 container={()=> this.refs.allDay}
                 selectable={this.props.selectable}
               />
+              <div className='rbc-rooms'>
+                {roomsCount.map(function (room, idx) {
+                  return _this.renderRooms(room);
+                })}
+              </div>
               <div style={{ zIndex: 1, position: 'relative' }}>
                 { this.renderAllDayEvents(range, levels) }
               </div>
@@ -152,6 +157,17 @@ let TimeGrid = React.createClass({
     });
   },
 
+  renderRooms(room, dayKey) {
+    if(!this.props.dailyView) {
+      return null
+    }
+
+    return (
+      <div className='rbc-room'>
+        {room}
+      </div>
+    );
+  },
 
   renderEvents(range, events){
     let { min, max, endAccessor, startAccessor, components } = this.props;
