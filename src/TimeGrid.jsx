@@ -100,7 +100,7 @@ let TimeGrid = React.createClass({
 
     let segments = allDayEvents.map(evt => eventSegments(evt, start, end, this.props))
     let { levels } = eventLevels(segments)
-    let self = this;
+    var self = this;
 
     return (
       <div className='rbc-time-view'>
