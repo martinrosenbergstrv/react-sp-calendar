@@ -120,7 +120,7 @@ let TimeGrid = React.createClass({
               />
               <div className='rbc-rooms'>
                 {roomsCount.map(function (room, idx) {
-                  return _this.renderRooms(room);
+                  return this.renderRooms(room);
                 })}
               </div>
               <div style={{ zIndex: 1, position: 'relative' }}>
