@@ -100,6 +100,7 @@ let TimeGrid = React.createClass({
 
     let segments = allDayEvents.map(evt => eventSegments(evt, start, end, this.props))
     let { levels } = eventLevels(segments)
+    let self = this;
 
     return (
       <div className='rbc-time-view'>
@@ -120,7 +121,7 @@ let TimeGrid = React.createClass({
               />
               <div className='rbc-rooms'>
                 {roomsCount.map(function (room, idx) {
-                  return this.renderRooms(room);
+                  return self.renderRooms(room);
                 })}
               </div>
               <div style={{ zIndex: 1, position: 'relative' }}>
